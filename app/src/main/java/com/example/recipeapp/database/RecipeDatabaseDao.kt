@@ -13,7 +13,7 @@ interface RecipeDatabaseDao {
 
     //Notice the :key. You use the colon notation in the query to reference arguments in the function.
     @Query("SELECT * from recipe_table WHERE recipeID = :key")
-    fun get(key: Long): Recipe?
+    fun getRecipe(key: Long): LiveData<Recipe>
 
     @Query("SELECT * from recipe_table")
     fun readAllData(): LiveData<List<Recipe>>

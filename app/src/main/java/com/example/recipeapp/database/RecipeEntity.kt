@@ -9,9 +9,17 @@ data class Recipe(
     @PrimaryKey(autoGenerate = true)
     var recipeID: Long = 0L,
     @ColumnInfo(name = "recipe_title")
-    var title: String = "",
+    var recipeName: String = "",
     @ColumnInfo(name = "recipe_desc")
     var description: String = "",
+    @ColumnInfo(name ="minutes")
+    var minutes: Int = 30,
+    @ColumnInfo(name ="calories")
+    var calories: Int = 100,
+    @ColumnInfo(name ="rate")
+    var rate: Double = 5.0,
     @ColumnInfo(name = "recipe_img")
-    var img: String = ""
+    var image_url: String = "",
+    @ColumnInfo(name ="ingredients")
+    var ingredients : String = ""
 )

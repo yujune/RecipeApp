@@ -5,13 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.recipeapp.model.Recipe
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
+import com.example.recipeapp.database.Recipe
+import com.example.recipeapp.model.RecipeModel
 
 //extends  RecyclerView.Adapter<RecyclerView.ViewHolder>
 class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -25,7 +23,6 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
         return RecipeViewHolder(
             layoutInflater.inflate(R.layout.recommended_recipe_view,parent,false)
         )
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -47,7 +44,8 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
     }
 
     fun submitList(recipeList: List<Recipe>){
-        items = recipeList
+        this.items = recipeList
+        notifyDataSetChanged()
     }
 
     // this is the custom viewholder class which specify how your view holder should look like.
@@ -61,8 +59,8 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
         //taking each individual recipe obj and bind to the view in the layout
         fun bind(recipe: Recipe, clickListener: OnItemClickListener){
 
-            recommendRecipeTitle.setText(recipe.title)
-            recommendRecipeDesc.setText(recipe.body)
+            recommendRecipeTitle.setText(recipe.recipeName)
+            recommendRecipeDesc.setText(recipe.description)
 
             //create request obj
             val requestOptions = RequestOptions()
@@ -71,7 +69,7 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOptions)
-                .load(recipe.image)
+                .load(recipe.image_url)
                 .into(recommendRecipeImage)
 
             itemView.setOnClickListener {

@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Recipe::class], version = 1, exportSchema = false)
+@Database(entities = [Recipe::class], version = 2, exportSchema = false)
 abstract class RecipeDatabase: RoomDatabase(){
     // or abstract fun recipeDao:RecipeDatabaseDao
-    abstract val rececipeDao: RecipeDatabaseDao
+    abstract val recipeDao: RecipeDatabaseDao
     companion object {
         //The INSTANCE variable will keep a reference to the database, when one has been created. This helps you avoid repeatedly opening connections to the database, which is computationally expensive.
         //@Volatile. The value of a volatile variable will never be cached,
