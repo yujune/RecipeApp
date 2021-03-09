@@ -55,12 +55,14 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
         val recommendRecipeTitle: TextView = itemView.findViewById(R.id.recommend_recipe_title)
         val recommendRecipeDesc: TextView = itemView.findViewById(R.id.recommend_recipe_desc)
         val recommendRecipeImage: ImageView = itemView.findViewById(R.id.recommend_recipe_image)
+        val recommendRecipeTimes : TextView = itemView.findViewById(R.id.recommend_recipe_times)
 
         //taking each individual recipe obj and bind to the view in the layout
         fun bind(recipe: Recipe, clickListener: OnItemClickListener){
 
             recommendRecipeTitle.setText(recipe.recipeName)
             recommendRecipeDesc.setText(recipe.description)
+            recommendRecipeTimes.setText(recipe.minutes.toString() + " min")
 
             //create request obj
             val requestOptions = RequestOptions()

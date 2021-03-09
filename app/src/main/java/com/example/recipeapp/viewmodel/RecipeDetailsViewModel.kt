@@ -12,20 +12,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RecipeDetailsViewModel(application: Application): AndroidViewModel(application) {
-    val recipe: LiveData<Recipe>
+    //var recipe: LiveData<Recipe>
     private val repository: RecipeRepository
 
 
     init {
         val recipeDao = RecipeDatabase.getInstance(application).recipeDao
         repository = RecipeRepository(recipeDao)
-        recipe =
+        //recipe =
     }
 
-    fun getRecipe(recipeID: Long){
-        viewModelScope.launch (Dispatchers.IO) {
-           recipe = repository.getRecipe(recipeID)
-        }
+    fun getRecipe(recipeID: Long): LiveData<Recipe>{
+
+        return repository.getRecipe(recipeID)
+
     }
 
 

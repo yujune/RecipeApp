@@ -13,7 +13,7 @@ class RecipeRepository(private val recipeDao: RecipeDatabaseDao){
 
     }
 
-    suspend fun getRecipe(recipeID:Long): LiveData<Recipe>{
+    fun getRecipe(recipeID:Long): LiveData<Recipe>{
         return recipeDao.getRecipe(recipeID)
     }
 

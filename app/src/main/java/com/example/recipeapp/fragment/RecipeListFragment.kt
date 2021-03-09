@@ -128,7 +128,7 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
     }
 
     override fun onItemClicked(recipe: Recipe) {
-        Toast.makeText(context,"User name ${recipe.recipeName}", Toast.LENGTH_LONG)
+        Toast.makeText(context,"${recipe.recipeName}", Toast.LENGTH_LONG)
             .show()
         val bundle = Bundle()
         bundle.putLong(RECIPE_ID,recipe.recipeID)

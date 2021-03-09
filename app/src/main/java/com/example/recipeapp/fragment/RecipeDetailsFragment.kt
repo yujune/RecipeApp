@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.recipeapp.R
 import com.example.recipeapp.database.Recipe
 import com.example.recipeapp.databinding.FragmentRecipeDetailsBinding
@@ -36,14 +38,23 @@ class RecipeDetailsFragment : Fragment() {
 
         recipeDetailViewModel = ViewModelProvider(this).get(RecipeDetailsViewModel::class.java)
 
-        recipeDetailViewModel.recipe.observe(viewLifecycleOwner, Observer {recipe ->
-            binding.recipeDetialsIconTextCalories.setText(recipe.calories)
+        recipeDetailViewModel.getRecipe(recipeID).observe(viewLifecycleOwner, Observer {recipe ->
+            binding.recipeDetialsTextTime.setText(recipe.minutes.toString())
             binding.recipeDetialsTextRates.setText(recipe.rate.toString())
+            binding.recipeDetialsIconTextCalories.setText(recipe.calories.toString())
+            binding.recipeDetailsTextIngredients.setText(recipe.ingredients)
+
+            //create request obj
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.ic_launcher_background)  // default image
+                .error(R.drawable.ic_launcher_foreground)        // error image
+
+            Glide.with(this)
+                .applyDefaultRequestOptions(requestOptions)
+                .load(recipe.image_url)
+                .into(binding.recipeDetailsImage)
+
         })
-        //recipe = recipeDetailViewModel.getRecipe(recipeID)
-//
-//        binding.recipeDetialsTextTime.setText(recipe.minutes)
-//        binding.recipeDetialsIconTextCalories.setText(recipe.calories)
 
         return view
     }
