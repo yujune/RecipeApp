@@ -18,8 +18,14 @@ data class Recipe(
     var calories: Int = 100,
     @ColumnInfo(name ="rate")
     var rate: Double = 5.0,
+    @ColumnInfo(name ="type")
+    var type: String = "",
+    @ColumnInfo(name ="saved")
+    var saved: Boolean = false,
     @ColumnInfo(name = "recipe_img")
     var image_url: String = "",
     @ColumnInfo(name ="ingredients")
-    var ingredients : String = ""
+    var ingredients : String = "",
+    @ColumnInfo(name ="steps")
+    var steps: String = "",
 )

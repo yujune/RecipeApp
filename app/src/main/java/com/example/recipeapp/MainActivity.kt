@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.room.Room
+import com.example.recipeapp.database.RecipeDatabase
 
 class MainActivity : AppCompatActivity()
 {

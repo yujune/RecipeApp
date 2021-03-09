@@ -31,8 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="-35dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/corner_layout_bg"
             android:padding="5dp">
 
@@ -40,6 +40,7 @@
                 android:id="@+id/recommend_recipe_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="30 min"/>
 
         </LinearLayout>
@@ -50,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
                 android:text="Maggie Curry"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -63,10 +65,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/recommend_recipe_title"
                 app:layout_constraintTop_toBottomOf="@+id/recommend_recipe_title" />
+
+            <TextView
+                android:id="@+id/recommend_recipe_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Breakfast"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/recommend_recipe_title"
+                app:layout_constraintTop_toBottomOf="@+id/recommend_recipe_title" />
+
 
 
     </LinearLayout>

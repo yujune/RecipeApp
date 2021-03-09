@@ -2,12 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recipe_nav.xml"
     app:startDestination="@id/recipeListFragment">
 
     <fragment
         android:id="@+id/recipeListFragment"
-        android:label="Recipes"
+        android:label="@string/fragment_1"
         android:name="com.example.recipeapp.fragment.RecipeListFragment"
         tools:layout="@layout/fragment_recipe_list" >
         <action
@@ -16,11 +15,24 @@
     </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
-        android:label="Recipe Details"
+        android:label="@string/fragment_2"
         android:name="com.example.recipeapp.fragment.RecipeDetailsFragment"
         tools:layout="@layout/fragment_recipe_details" >
         <action
             android:id="@+id/action_recipeDetailsFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_recipeEditDetailsFragment"
+            app:destination="@id/recipeEditDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipeEditDetailsFragment"
+        android:label="@string/fragment_3"
+        android:name="com.example.recipeapp.fragment.RecipeEditFragment"
+        tools:layout="@layout/fragment_recipe_edit" >
+        <action
+            android:id="@+id/action_recipeEditDetailsFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
     </fragment>
 </navigation>

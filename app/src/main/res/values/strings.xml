@@ -2,4 +2,16 @@
     <string name="app_name">RecipeApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_1">Recipe</string>
+    <string name="fragment_2">Recipe Details</string>
+    <string name="fragment_3">Recipe Edit</string>
+    <string name="recipe_name">Recipe name :</string>
+    <string name="recipe_desc">Description :</string>
+    <string name="recipe_cooking_minutes">Cooking minutes :</string>
+    <string name="recipe_rate">Rate :</string>
+    <string name="recipe_calories">Calories :</string>
+    <string name="recipe_ingredients">Ingredients :</string>
+    <string name="recipe_steps">Steps :</string>
+    <string name="recipe_hint_name">e.g. pizza</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
