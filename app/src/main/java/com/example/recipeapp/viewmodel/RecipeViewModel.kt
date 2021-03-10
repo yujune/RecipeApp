@@ -10,7 +10,7 @@ import com.example.recipeapp.database.RecipeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RecipeViewModel(application: Application):AndroidViewModel(application) {
+class RecipeViewModel(application: Application) : AndroidViewModel(application) {
 
     val readAllData: LiveData<MutableList<Recipe>>
     private val repository: RecipeRepository
@@ -23,7 +23,7 @@ class RecipeViewModel(application: Application):AndroidViewModel(application) {
     }
 
 
-    fun getRecipeByType(type: String): LiveData<MutableList<Recipe>>{
+    fun getRecipeByType(type: String): LiveData<MutableList<Recipe>> {
         return repository.getRecipeByType(type)
     }
 

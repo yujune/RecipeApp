@@ -113,6 +113,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:inputType="number"
             android:hint="60"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/recipe_add_label_minutes"
@@ -138,6 +139,7 @@
             android:layout_marginStart="8dp"
             android:hint="4.5"
             android:textSize="16dp"
+            android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/recipe_add_label_rate"
             app:layout_constraintStart_toEndOf="@+id/recipe_add_label_rate"
             app:layout_constraintTop_toTopOf="@+id/recipe_add_label_rate" />
@@ -155,11 +157,12 @@
 
         <EditText
             android:id="@+id/recipe_add_edit_text_calories"
-            android:layout_width="50dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:hint="13000"
             android:textSize="16dp"
+            android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/recipe_add_label_calories"
             app:layout_constraintStart_toEndOf="@+id/recipe_add_label_calories"
             app:layout_constraintTop_toTopOf="@+id/recipe_add_label_calories" />
@@ -234,6 +237,7 @@
 
 
     </LinearLayout>
+
 
 </LinearLayout>
 

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/recipeListFragment"
-        android:label="@string/fragment_1"
+        android:label="@string/fragment_host"
         android:name="com.example.recipeapp.fragment.RecipeListFragment"
         tools:layout="@layout/fragment_recipe_list" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
-        android:label="@string/fragment_2"
+        android:label="@string/fragment_detail"
         android:name="com.example.recipeapp.fragment.RecipeDetailsFragment"
         tools:layout="@layout/fragment_recipe_details" >
         <action
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/recipeEditDetailsFragment"
-        android:label="@string/fragment_3"
+        android:label="@string/fragment_edit"
         android:name="com.example.recipeapp.fragment.RecipeEditFragment"
         tools:layout="@layout/fragment_recipe_edit" >
         <action
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/recipeAddFragment"
         android:name="com.example.recipeapp.fragment.RecipeAddFragment"
-        android:label="fragment_recipe_add"
+        android:label="@string/fragment_add"
         tools:layout="@layout/fragment_recipe_add" >
         <action
             android:id="@+id/action_recipeAddFragment_to_recipeListFragment"

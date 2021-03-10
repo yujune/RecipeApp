@@ -1,7 +1,9 @@
 package com.example.recipeapp.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -17,12 +19,21 @@ import com.example.recipeapp.viewmodel.RecipeEditViewModel
 class RecipeEditFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentRecipeEditBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var recipeEditViewModel: RecipeEditViewModel
     private var recipeID: Long = 0
     private lateinit var imgUrl: String
+    private var updatedName = ""
+    private var updatedDescription = ""
+    private var updatedCalories = ""
+    private var updatedRates = ""
+    private var updatedTime = ""
+    private var updatedIngredients = ""
+    private var updatedSteps = ""
+    private var updatedType = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +43,38 @@ class RecipeEditFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val view = binding.root
         setHasOptionsMenu(true)
 
+        setUpSpinner()
+
+        recipeID = requireArguments().getLong(RecipeListFragment.RECIPE_ID)
+        recipeEditViewModel = ViewModelProvider(this).get(RecipeEditViewModel::class.java)
+        recipeEditViewModel.getRecipe(recipeID).observe(viewLifecycleOwner, { recipe ->
+            binding.recipeEditTextName.setText(recipe.recipeName)
+            binding.recipeEditTextDesc.setText(recipe.description)
+            binding.recipeEditIconTextCalories.setText(recipe.calories.toString())
+            binding.recipeEditTextRates.setText(recipe.rate.toString())
+            binding.recipeEditTextTime.setText(recipe.minutes.toString())
+            binding.recipeEditTextIngredients.setText(recipe.ingredients)
+            binding.recipeEditTextSteps.setText(recipe.steps)
+            imgUrl = recipe.image_url
+
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.icon_food)  // default image
+                .error(R.drawable.icon_error)        // error image
+
+            Glide.with(this)
+                .applyDefaultRequestOptions(requestOptions)
+                .load(recipe.image_url)
+                .into(binding.recipeEditImage)
+        })
+
+        binding.recipeEditFloatingActionDone.setOnClickListener { view ->
+            updateRoomDatabase(recipeID)
+        }
+
+        return view
+    }
+
+    private fun setUpSpinner() {
         val spinner: Spinner = binding.recipeEditSpinner
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -46,60 +89,100 @@ class RecipeEditFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         spinner.onItemSelectedListener = this
-
-        recipeID = requireArguments().getLong(RecipeListFragment.RECIPE_ID)
-        recipeEditViewModel = ViewModelProvider(this).get(RecipeEditViewModel::class.java)
-        recipeEditViewModel.getRecipe(recipeID).observe(viewLifecycleOwner,{recipe ->
-            binding.recipeEditTextName.setText(recipe.recipeName)
-            binding.recipeEditTextDesc.setText(recipe.description)
-            binding.recipeEditIconTextCalories.setText(recipe.calories.toString())
-            binding.recipeEditTextRates.setText(recipe.rate.toString())
-            binding.recipeEditTextTime.setText(recipe.minutes.toString())
-            binding.recipeEditTextIngredients.setText(recipe.ingredients)
-            binding.recipeEditTextSteps.setText(recipe.steps)
-            imgUrl = recipe.image_url
-
-            val requestOptions = RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background)  // default image
-                .error(R.drawable.ic_launcher_foreground)        // error image
-
-            Glide.with(this)
-                .applyDefaultRequestOptions(requestOptions)
-                .load(recipe.image_url)
-                .into(binding.recipeEditImage)
-
-
-        })
-
-
-        binding.recipeEditFloatingActionDone.setOnClickListener { view ->
-            updateRoomDatabase(recipeID)
-        }
-
-        return view
     }
 
     fun updateRoomDatabase(recipeID: Long) {
 
-        val updatedName = binding.recipeEditTextName.text.toString()
-        val updatedDescription = binding.recipeEditTextDesc.text.toString()
-        val updatedCalories = binding.recipeEditIconTextCalories.text.toString().toInt()
-        val updatedRates = binding.recipeEditTextRates.text.toString().toDouble()
-        val updatedTime = binding.recipeEditTextTime.text.toString().toInt()
-        val updatedIngredients = binding.recipeEditTextIngredients.text.toString()
-        val updatedSteps = binding.recipeEditTextSteps.text.toString()
-        val updatedType = binding.recipeEditSpinner.selectedItem.toString()
+        if(checkInput()){
 
-        val updatedRecipe = Recipe(recipeID,updatedName,updatedDescription,updatedTime,updatedCalories,updatedRates,updatedType,false,imgUrl,updatedIngredients,updatedSteps)
-        recipeEditViewModel.updateRecipe(updatedRecipe)
-        Toast.makeText(requireContext(),getString(R.string.updated_successfully),Toast.LENGTH_SHORT).show()
-        findNavController().navigate(R.id.action_recipeEditDetailsFragment_to_recipeListFragment)
+            updatedType = binding.recipeEditSpinner.selectedItem.toString()
+
+            val updatedRecipe = Recipe(
+                recipeID,
+                updatedName,
+                updatedDescription,
+                updatedTime.toInt(),
+                updatedCalories.toInt(),
+                updatedRates.toDouble(),
+                updatedType,
+                false,
+                imgUrl,
+                updatedIngredients,
+                updatedSteps
+            )
+            recipeEditViewModel.updateRecipe(updatedRecipe)
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.updated_successfully),
+                Toast.LENGTH_SHORT
+            ).show()
+            findNavController().navigate(R.id.action_recipeEditDetailsFragment_to_recipeListFragment)
+            closeSoftKeyBoard()
+
+        }else{
+           return
+        }
+
+    }
+
+    private fun closeSoftKeyBoard() {
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+    }
+
+     private fun checkInput(): Boolean {
+
+        getInputText()
+
+        if(updatedName.isEmpty()){
+            binding.recipeEditTextName.setError(resources.getString(R.string.required_field))
+
+        }else if(updatedDescription.isEmpty()){
+            binding.recipeEditTextDesc.setError(resources.getString(R.string.required_field))
+
+        }else if(updatedTime.isEmpty()){
+            binding.recipeEditTextTime.setError(resources.getString(R.string.required_field))
+
+        }else if(updatedCalories.isEmpty()){
+            binding.recipeEditIconTextCalories.setError(resources.getString(R.string.required_field))
+
+        }else if(updatedRates.isEmpty()){
+            binding.recipeEditTextRates.setError(resources.getString(R.string.required_field))
+
+        }else if(updatedIngredients.isEmpty()){
+            binding.recipeEditTextIngredients.setError(resources.getString(R.string.required_field))
+
+        }else if(updatedSteps.isEmpty()){
+            binding.recipeEditTextSteps.setError(resources.getString(R.string.required_field))
+
+        }else{
+            return true
+        }
+
+        return false
+
+    }
+
+    private fun getInputText(){
+
+        updatedName = binding.recipeEditTextName.text.toString()
+        updatedDescription = binding.recipeEditTextDesc.text.toString()
+        updatedCalories = binding.recipeEditIconTextCalories.text.toString()
+        updatedRates = binding.recipeEditTextRates.text.toString()
+        updatedTime = binding.recipeEditTextTime.text.toString()
+        updatedIngredients = binding.recipeEditTextIngredients.text.toString()
+        updatedSteps = binding.recipeEditTextSteps.text.toString()
 
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 
-        (parent.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(this.requireContext(),R.color.black))
+        (parent.getChildAt(0) as TextView).setTextColor(
+            ContextCompat.getColor(
+                this.requireContext(),
+                R.color.black
+            )
+        )
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
@@ -107,17 +190,18 @@ class RecipeEditFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-         inflater.inflate(R.menu.edit_fragment_menu, menu)
+        inflater.inflate(R.menu.edit_fragment_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.item_delete -> {
-                Toast.makeText(requireContext(),getString(R.string.Delete),Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.Delete), Toast.LENGTH_SHORT)
+                    .show()
                 recipeEditViewModel.deleteByID(recipeID)
             }
-            else ->{
+            else -> {
 
             }
 

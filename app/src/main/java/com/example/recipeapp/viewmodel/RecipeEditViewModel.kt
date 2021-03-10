@@ -10,7 +10,7 @@ import com.example.recipeapp.database.RecipeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RecipeEditViewModel(application: Application): AndroidViewModel(application) {
+class RecipeEditViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: RecipeRepository
 
@@ -26,14 +26,14 @@ class RecipeEditViewModel(application: Application): AndroidViewModel(applicatio
 
     }
 
-    fun updateRecipe(recipe: Recipe){
-        viewModelScope.launch(Dispatchers.IO){
+    fun updateRecipe(recipe: Recipe) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.updateRecipe(recipe)
         }
     }
 
-    fun deleteByID(key:Long){
-        viewModelScope.launch ( Dispatchers.IO ){
+    fun deleteByID(key: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.deleteByID(key)
         }
     }

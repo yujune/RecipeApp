@@ -51,8 +51,9 @@
                         android:id="@+id/recipe_edit_text_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:textSize="14dp"
-                        android:text="30 min" />
+                        android:text="30" />
 
                 </LinearLayout>
 
@@ -74,6 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14dp"
+                        android:inputType="number"
                         android:text="4.5"/>
 
                 </LinearLayout>
@@ -96,7 +98,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14dp"
-                        android:text="215 kal"/>
+                        android:inputType="number"
+                        android:text="21500"/>
 
                 </LinearLayout>
 

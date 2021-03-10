@@ -7,8 +7,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.room.Room
 import com.example.recipeapp.database.RecipeDatabase
 
-class MainActivity : AppCompatActivity()
-{
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

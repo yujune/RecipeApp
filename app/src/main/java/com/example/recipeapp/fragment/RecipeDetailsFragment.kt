@@ -22,11 +22,11 @@ class RecipeDetailsFragment : Fragment() {
 
     private var _binding: FragmentRecipeDetailsBinding? = null
     private var recipeID: Long = 0
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var recipeDetailViewModel: RecipeDetailsViewModel
-    private lateinit var recipe : Recipe
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +40,7 @@ class RecipeDetailsFragment : Fragment() {
 
         recipeDetailViewModel = ViewModelProvider(this).get(RecipeDetailsViewModel::class.java)
 
-        recipeDetailViewModel.getRecipe(recipeID).observe(viewLifecycleOwner, Observer {recipe ->
+        recipeDetailViewModel.getRecipe(recipeID).observe(viewLifecycleOwner, Observer { recipe ->
             binding.recipeDetailsTextName.setText(recipe.recipeName)
             binding.recipeDetailsTextDesc.setText(recipe.description)
             binding.recipeDetialsTextTime.setText(recipe.minutes.toString())
@@ -52,8 +52,8 @@ class RecipeDetailsFragment : Fragment() {
 
             //create request obj
             val requestOptions = RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background)  // default image
-                .error(R.drawable.ic_launcher_foreground)        // error image
+                .placeholder(R.drawable.icon_food)  // default image
+                .error(R.drawable.icon_error)        // error image
 
             Glide.with(this)
                 .applyDefaultRequestOptions(requestOptions)
@@ -62,24 +62,21 @@ class RecipeDetailsFragment : Fragment() {
 
         })
 
-        binding.recipeDetailsFloatingActionEdit.setOnClickListener {
-            view -> gotoRecipeEditFragment()
+        binding.recipeDetailsFloatingActionEdit.setOnClickListener { view ->
+            gotoRecipeEditFragment()
         }
 
         return view
     }
 
-    fun gotoRecipeEditFragment(){
+    fun gotoRecipeEditFragment() {
 
-        Toast.makeText(context,"Edit Recipe",Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, resources.getString(R.string.edit_recipe), Toast.LENGTH_SHORT).show()
         val bundle = Bundle()
         bundle.putLong(RecipeListFragment.RECIPE_ID, recipeID)
         findNavController().navigate(
             R.id.action_recipeDetailsFragment_to_recipeEditDetailsFragment,
             bundle
         )
-
     }
-
-
 }

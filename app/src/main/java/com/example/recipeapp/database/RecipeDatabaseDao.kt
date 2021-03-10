@@ -23,7 +23,7 @@ interface RecipeDatabaseDao {
     fun clear()
 
     @Query("DELETE FROM recipe_table WHERE recipeID = :key")
-    fun deleteByID(key:Long)
+    fun deleteByID(key: Long)
 
     @Update
     fun updateRecipe(recipe: Recipe)

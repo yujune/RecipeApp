@@ -9,7 +9,7 @@ import com.example.recipeapp.database.RecipeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RecipeAddViewModel(application: Application):AndroidViewModel(application) {
+class RecipeAddViewModel(application: Application) : AndroidViewModel(application) {
 
     private var repository: RecipeRepository
 
@@ -21,8 +21,8 @@ class RecipeAddViewModel(application: Application):AndroidViewModel(application)
     }
 
     //run in background thread
-    fun addRecipe(recipe: Recipe){
-        viewModelScope.launch(Dispatchers.IO){
+    fun addRecipe(recipe: Recipe) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.addRecipe(recipe)
         }
     }

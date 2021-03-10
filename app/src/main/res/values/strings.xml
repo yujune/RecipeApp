@@ -2,9 +2,10 @@
     <string name="app_name">RecipeApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="fragment_1">Recipe</string>
-    <string name="fragment_2">Recipe Details</string>
-    <string name="fragment_3">Recipe Edit</string>
+    <string name="fragment_host">Recipe</string>
+    <string name="fragment_detail">Recipe Details</string>
+    <string name="fragment_edit">Recipe Edit</string>
+    <string name="fragment_add">Recipe Add</string>
     <string name="recipe_name">Recipe name :</string>
     <string name="recipe_desc">Description :</string>
     <string name="recipe_cooking_minutes">Cooking minutes :</string>
@@ -19,5 +20,8 @@
     <string name="updated_successfully">Updated Successfully</string>
     <string name="Delete">Delete</string>
     <string name="permission_denied">Permission Denied</string>
+    <string name="required_field">Required field</string>
+    <string name="pls_fill_the_required_field">Please fill up the required fields</string>
+    <string name="edit_recipe">Edit Recipe</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

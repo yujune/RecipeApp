@@ -12,26 +12,27 @@ import com.example.recipeapp.database.Recipe
 import com.example.recipeapp.model.RecipeModel
 
 //extends  RecyclerView.Adapter<RecyclerView.ViewHolder>
-class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items : MutableList<Recipe> = mutableListOf()
+    private var items: MutableList<Recipe> = mutableListOf()
 
     //tell recylerview create each item a viewholder.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         // return new recipe view obj
         val layoutInflater = LayoutInflater.from(parent.context)
         return RecipeViewHolder(
-            layoutInflater.inflate(R.layout.recommended_recipe_view,parent,false)
+            layoutInflater.inflate(R.layout.recommended_recipe_view, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        when(holder){
+        when (holder) {
             is RecipeViewHolder -> {
                 //bind the data to the view holder that particularly in view on screen.
                 //onBindViewHolder will be called for each list item when user scroll on the screen
-                holder.bind(items.get(position),itemClickListener)
+                holder.bind(items.get(position), itemClickListener)
 
             }
         }
@@ -43,12 +44,12 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
         return items.size
     }
 
-    fun submitList(recipeList: MutableList<Recipe>){
+    fun submitList(recipeList: MutableList<Recipe>) {
         this.items = recipeList
         notifyDataSetChanged()
     }
 
-    fun submitListByType(recipeList: MutableList<Recipe>){
+    fun submitListByType(recipeList: MutableList<Recipe>) {
         this.items.clear();
         this.items.addAll(recipeList)
         notifyDataSetChanged()
@@ -57,15 +58,15 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
     // this is the custom viewholder class which specify how your view holder should look like.
     class RecipeViewHolder constructor(
         itemView: View
-    ): RecyclerView.ViewHolder(itemView){
+    ) : RecyclerView.ViewHolder(itemView) {
         val recommendRecipeTitle: TextView = itemView.findViewById(R.id.recommend_recipe_title)
         val recommendRecipeDesc: TextView = itemView.findViewById(R.id.recommend_recipe_desc)
         val recommendRecipeImage: ImageView = itemView.findViewById(R.id.recommend_recipe_image)
-        val recommendRecipeTimes : TextView = itemView.findViewById(R.id.recommend_recipe_times)
+        val recommendRecipeTimes: TextView = itemView.findViewById(R.id.recommend_recipe_times)
         val recipeType: TextView = itemView.findViewById(R.id.recommend_recipe_type)
 
         //taking each individual recipe obj and bind to the view in the layout
-        fun bind(recipe: Recipe, clickListener: OnItemClickListener){
+        fun bind(recipe: Recipe, clickListener: OnItemClickListener) {
 
             recommendRecipeTitle.setText(recipe.recipeName)
             recommendRecipeDesc.setText(recipe.description)
@@ -74,8 +75,8 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
 
             //create request obj
             val requestOptions = RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background)  // default image
-                .error(R.drawable.ic_launcher_foreground)        // error image
+                .placeholder(R.drawable.icon_food)  // default image
+                .error(R.drawable.icon_error)        // error image
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOptions)
@@ -89,7 +90,7 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
         }
     }
 
-    interface OnItemClickListener{
+    interface OnItemClickListener {
         fun onItemClicked(recipe: Recipe)
     }
 
