@@ -32,5 +32,11 @@ class RecipeEditViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
+    fun deleteByID(key:Long){
+        viewModelScope.launch ( Dispatchers.IO ){
+            repository.deleteByID(key)
+        }
+    }
+
 
 }

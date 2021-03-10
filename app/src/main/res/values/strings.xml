@@ -12,7 +12,12 @@
     <string name="recipe_calories">Calories :</string>
     <string name="recipe_ingredients">Ingredients :</string>
     <string name="recipe_steps">Steps :</string>
-    <string name="recipe_hint_name">e.g. pizza</string>
+    <string name="recipe_hint_name">pizza</string>
+    <string name="recipe_hint_desc">Hot and Spicy!</string>
+    <string name="recipe_hint_ingredients">- eggs, milk, flour</string>
+    <string name="recipe_hint_steps">1. Boil the eggs, Mix with the milk and flour.</string>
     <string name="updated_successfully">Updated Successfully</string>
+    <string name="Delete">Delete</string>
+    <string name="permission_denied">Permission Denied</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

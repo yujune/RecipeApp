@@ -1,9 +1,7 @@
 package com.example.recipeapp.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -32,6 +30,7 @@ class RecipeEditFragment : Fragment(), AdapterView.OnItemSelectedListener {
     ): View? {
         _binding = FragmentRecipeEditBinding.inflate(inflater, container, false)
         val view = binding.root
+        setHasOptionsMenu(true)
 
         val spinner: Spinner = binding.recipeEditSpinner
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -105,8 +104,26 @@ class RecipeEditFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onNothingSelected(parent: AdapterView<*>) {
 
-        TODO("Not yet implemented")
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+         inflater.inflate(R.menu.edit_fragment_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.item_delete -> {
+                Toast.makeText(requireContext(),getString(R.string.Delete),Toast.LENGTH_SHORT).show()
+                recipeEditViewModel.deleteByID(recipeID)
+            }
+            else ->{
+
+            }
+
+        }
+
+        findNavController().navigate(R.id.action_recipeEditDetailsFragment_to_recipeListFragment)
+        return super.onOptionsItemSelected(item)
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.recipeapp.fragment
 
 import android.os.Bundle
+import android.os.Environment
 import android.view.*
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -39,6 +40,9 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
 
         recipeViewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
 
+        binding.recipeFloatingActionAdd.setOnClickListener { view ->
+            navigateToRecipeAddFragment()
+        }
 
 //        var recipe1 = Recipe(
 //            100,
@@ -130,6 +134,10 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
         return view
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_recipe_list, container, false)
+    }
+
+    private fun navigateToRecipeAddFragment() {
+        findNavController().navigate(R.id.action_recipeListFragment_to_recipeAddFragment)
     }
 
     private fun initRecylerView(){

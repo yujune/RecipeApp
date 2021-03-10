@@ -1,10 +1,7 @@
 package com.example.recipeapp.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface RecipeDatabaseDao {
@@ -25,7 +22,11 @@ interface RecipeDatabaseDao {
     @Query("DELETE FROM recipe_table")
     fun clear()
 
+    @Query("DELETE FROM recipe_table WHERE recipeID = :key")
+    fun deleteByID(key:Long)
+
     @Update
     fun updateRecipe(recipe: Recipe)
+
 
 }

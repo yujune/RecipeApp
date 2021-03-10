@@ -25,4 +25,8 @@ class RecipeRepository(private val recipeDao: RecipeDatabaseDao){
         return recipeDao.getRecipeByType(type)
     }
 
+    suspend fun deleteByID(key:Long){
+        recipeDao.deleteByID(key)
+    }
+
 }
