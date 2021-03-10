@@ -13,5 +13,6 @@
     <string name="recipe_ingredients">Ingredients :</string>
     <string name="recipe_steps">Steps :</string>
     <string name="recipe_hint_name">e.g. pizza</string>
+    <string name="updated_successfully">Updated Successfully</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

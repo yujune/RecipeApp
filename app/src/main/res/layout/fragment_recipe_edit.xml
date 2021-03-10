@@ -51,6 +51,7 @@
                         android:id="@+id/recipe_edit_text_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="14dp"
                         android:text="30 min" />
 
                 </LinearLayout>
@@ -72,6 +73,7 @@
                         android:id="@+id/recipe_edit_text_rates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="14dp"
                         android:text="4.5"/>
 
                 </LinearLayout>
@@ -93,6 +95,7 @@
                         android:id="@+id/recipe_edit_icon_text_calories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="14dp"
                         android:text="215 kal"/>
 
                 </LinearLayout>
@@ -134,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hamburger"
-            android:textSize="26dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <EditText
@@ -145,7 +148,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginTop="10dp"
             android:text="Hot and spicy."
-            android:textSize="18dp"/>
+            android:textSize="16dp"/>
 
     </LinearLayout>
 
@@ -164,7 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingredient"
-            android:textSize="26dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <EditText
@@ -175,7 +178,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginTop="10dp"
             android:text="- eggs \n - mayonese \n - flour"
-            android:textSize="18dp"/>
+            android:textSize="16dp"/>
 
     </LinearLayout>
 
@@ -193,7 +196,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Steps"
-            android:textSize="26dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <EditText
@@ -205,7 +208,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="32dp"
             android:text="1. Pour water.\n2. Boil Water.\n3. Done"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
     </LinearLayout>
 

@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class RecipeViewModel(application: Application):AndroidViewModel(application) {
 
-    val readAllData: LiveData<List<Recipe>>
+    val readAllData: LiveData<MutableList<Recipe>>
     private val repository: RecipeRepository
 
     //always called when this viewmodel is called.
@@ -29,8 +29,8 @@ class RecipeViewModel(application: Application):AndroidViewModel(application) {
         }
     }
 
-
-
-
+    fun getRecipeByType(type: String): LiveData<MutableList<Recipe>>{
+        return repository.getRecipeByType(type)
+    }
 
 }

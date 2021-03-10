@@ -25,6 +25,7 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var recipeViewModel: RecipeViewModel
+    private var recipeSelectedType: String = "Desserts"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -118,9 +119,13 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
 
 
         //observe the livedata obj, whenener we chg the data, the adpater can set the value
-        recipeViewModel.readAllData.observe(viewLifecycleOwner, Observer { recipe ->
-            recipeAdapter.submitList(recipe)
-        })
+//        recipeViewModel.readAllData.observe(viewLifecycleOwner, Observer { recipe ->
+//            recipeAdapter.submitList(recipe)
+//        })
+
+//        recipeViewModel.getRecipeByType(recipeSelectedType).observe(viewLifecycleOwner,{ recipe ->
+//            recipeAdapter.submitListByType(recipe)
+//        })
 
         return view
         // Inflate the layout for this fragment
@@ -134,11 +139,6 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
             adapter = recipeAdapter
         }
     }
-
-//    private fun addDataSet(){
-//        val data = DataSource.createDataSet()
-//        recipeAdapter.submitList(data)
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -180,15 +180,24 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         (parent.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(parent.context,R.color.white))
-        Toast.makeText(getActivity(), parent.getItemAtPosition(pos).toString(), Toast.LENGTH_SHORT).show()
+        recipeSelectedType =  parent.getItemAtPosition(pos).toString()
+        Toast.makeText(getActivity(), "You selected type of "+recipeSelectedType, Toast.LENGTH_SHORT).show()
         val recipesArray: Array<String> = resources.getStringArray(R.array.recipetypes)
 
+        recipeViewModel.getRecipeByType(recipeSelectedType).observe(viewLifecycleOwner,{ recipe ->
+            recipeAdapter.submitListByType(recipe)
+        })
+
         when(parent.getItemAtPosition(pos)){
-            recipesArray[0] -> Toast.makeText(
-                getActivity(),
-                "Breakfast from spinner",
-                Toast.LENGTH_SHORT
-            ).show()
+            recipesArray[0] -> {
+
+                Toast.makeText(
+                    getActivity(),
+                    "Breakfast from spinner",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
             recipesArray[1] -> Toast.makeText(
                 getActivity(),
                 "Lunch from spinner",
@@ -204,11 +213,14 @@ class RecipeListFragment : Fragment(), RecipeRecyclerAdapter.OnItemClickListener
                 "Snacks from spinner",
                 Toast.LENGTH_SHORT
             ).show()
-            recipesArray[4] -> Toast.makeText(
-                getActivity(),
-                "Dessert from spinner",
-                Toast.LENGTH_SHORT
-            ).show()
+            recipesArray[4] -> {
+                Toast.makeText(
+                    getActivity(),
+                    "Dessert from spinner",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
             recipesArray[5] -> Toast.makeText(
                 getActivity(),
                 "Main Course from spinner",

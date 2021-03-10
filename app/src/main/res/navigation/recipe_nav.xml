@@ -34,5 +34,8 @@
         <action
             android:id="@+id/action_recipeEditDetailsFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_recipeEditDetailsFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
     </fragment>
 </navigation>

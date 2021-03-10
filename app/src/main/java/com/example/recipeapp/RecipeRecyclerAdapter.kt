@@ -14,7 +14,7 @@ import com.example.recipeapp.model.RecipeModel
 //extends  RecyclerView.Adapter<RecyclerView.ViewHolder>
 class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private var items : List<Recipe> = ArrayList()
+    private var items : MutableList<Recipe> = mutableListOf()
 
     //tell recylerview create each item a viewholder.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -43,8 +43,14 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
         return items.size
     }
 
-    fun submitList(recipeList: List<Recipe>){
+    fun submitList(recipeList: MutableList<Recipe>){
         this.items = recipeList
+        notifyDataSetChanged()
+    }
+
+    fun submitListByType(recipeList: MutableList<Recipe>){
+        this.items.clear();
+        this.items.addAll(recipeList)
         notifyDataSetChanged()
     }
 
@@ -56,6 +62,7 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
         val recommendRecipeDesc: TextView = itemView.findViewById(R.id.recommend_recipe_desc)
         val recommendRecipeImage: ImageView = itemView.findViewById(R.id.recommend_recipe_image)
         val recommendRecipeTimes : TextView = itemView.findViewById(R.id.recommend_recipe_times)
+        val recipeType: TextView = itemView.findViewById(R.id.recommend_recipe_type)
 
         //taking each individual recipe obj and bind to the view in the layout
         fun bind(recipe: Recipe, clickListener: OnItemClickListener){
@@ -63,6 +70,7 @@ class RecipeRecyclerAdapter(val itemClickListener: OnItemClickListener): Recycle
             recommendRecipeTitle.setText(recipe.recipeName)
             recommendRecipeDesc.setText(recipe.description)
             recommendRecipeTimes.setText(recipe.minutes.toString() + " min")
+            recipeType.setText(recipe.type)
 
             //create request obj
             val requestOptions = RequestOptions()

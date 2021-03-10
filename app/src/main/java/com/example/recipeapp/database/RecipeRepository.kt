@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 class RecipeRepository(private val recipeDao: RecipeDatabaseDao){
 
-    val readAllData: LiveData<List<Recipe>> = recipeDao.readAllData()
+    val readAllData: LiveData<MutableList<Recipe>> = recipeDao.readAllData()
 
     //val getRecipeDetails : LiveData<Recipe> = recipeDao.getRecipe()
 
@@ -13,8 +13,16 @@ class RecipeRepository(private val recipeDao: RecipeDatabaseDao){
 
     }
 
+    suspend fun updateRecipe(recipe: Recipe){
+        recipeDao.updateRecipe(recipe)
+    }
+
     fun getRecipe(recipeID:Long): LiveData<Recipe>{
         return recipeDao.getRecipe(recipeID)
+    }
+
+    fun getRecipeByType(type: String): LiveData<MutableList<Recipe>>{
+        return recipeDao.getRecipeByType(type)
     }
 
 }

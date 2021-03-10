@@ -41,6 +41,8 @@ class RecipeDetailsFragment : Fragment() {
         recipeDetailViewModel = ViewModelProvider(this).get(RecipeDetailsViewModel::class.java)
 
         recipeDetailViewModel.getRecipe(recipeID).observe(viewLifecycleOwner, Observer {recipe ->
+            binding.recipeDetailsTextName.setText(recipe.recipeName)
+            binding.recipeDetailsTextDesc.setText(recipe.description)
             binding.recipeDetialsTextTime.setText(recipe.minutes.toString())
             binding.recipeDetialsTextRates.setText(recipe.rate.toString())
             binding.recipeDetialsIconTextCalories.setText(recipe.calories.toString())

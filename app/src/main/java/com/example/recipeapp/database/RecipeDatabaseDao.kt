@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface RecipeDatabaseDao {
@@ -15,10 +16,16 @@ interface RecipeDatabaseDao {
     @Query("SELECT * from recipe_table WHERE recipeID = :key")
     fun getRecipe(key: Long): LiveData<Recipe>
 
+    @Query("SELECT * from recipe_table WHERE type = :type")
+    fun getRecipeByType(type: String): LiveData<MutableList<Recipe>>
+
     @Query("SELECT * from recipe_table")
-    fun readAllData(): LiveData<List<Recipe>>
+    fun readAllData(): LiveData<MutableList<Recipe>>
 
     @Query("DELETE FROM recipe_table")
     fun clear()
+
+    @Update
+    fun updateRecipe(recipe: Recipe)
 
 }
