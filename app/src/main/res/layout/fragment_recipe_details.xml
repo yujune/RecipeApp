@@ -113,12 +113,14 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_margin="20dp"
+            android:backgroundTint="@color/green"
             android:background="@drawable/corner_layout_bg">
         <TextView
             android:id="@+id/recipe_details_text_types"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
+            android:textColor="@color/white"
             android:text="Breakfast"
             android:textSize="20dp"
             android:textStyle="bold" />

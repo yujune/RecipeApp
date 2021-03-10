@@ -180,7 +180,7 @@ class RecipeEditFragment : Fragment(), AdapterView.OnItemSelectedListener {
         (parent.getChildAt(0) as TextView).setTextColor(
             ContextCompat.getColor(
                 this.requireContext(),
-                R.color.black
+                R.color.white
             )
         )
     }
